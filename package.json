@@ -1,0 +1,14 @@
+{
+  "name": "real-time-observer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kingsae1/real-time-observer.git",
+  "author": "kingsae <kingsae1@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "mongoose": "^6.5.2"
+  },
+  "scripts": {
+    "test": "node server.test.js"
+  }
+}
