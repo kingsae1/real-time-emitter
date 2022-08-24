@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
-class RTObserver {
+export class RTObserver {
   constructor(config) {
     this.config = config
   }
 }
 
-class RTMongoObserver extends RTObserver {
+export class RTMongoObserver extends RTObserver {
   db = undefined
   collection = undefined
   client = undefined
@@ -49,19 +49,22 @@ class RTMongoObserver extends RTObserver {
       return
     }
 
-    target.uuid = new Date().getTime()
-
-    console.log('[RTMongoObserver] subscribe - uuid : ' + target.uuid)
-
     return new Promise((resolve, reject) => {
-      const changeStream = target.watch(option)
-      this.target = {
-        [target.uuid]: changeStream,
-      }
+      const changeStream = target?.watch(option)
 
-      changeStream.on('change', (data) => {
-        resolve(data)
-      })
+      if (changeStream) {
+        target.uuid = new Date().getTime()
+
+        console.log('[RTMongoObserver] subscribe - uuid : ' + target.uuid)
+
+        this.target = {
+          [target.uuid]: changeStream,
+        }
+
+        changeStream.on('change', (data) => {
+          resolve(data)
+        })
+      }
     })
   }
 
