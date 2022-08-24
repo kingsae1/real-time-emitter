@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
-export class RTObserver {
+class RTObserver {
   constructor(config) {
     this.config = config
   }
 }
 
-export class RTMongoObserver extends RTObserver {
+class RTMongoObserver extends RTObserver {
   db = undefined
   collection = undefined
   client = undefined
