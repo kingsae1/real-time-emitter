@@ -11,13 +11,18 @@ class RTMongoObserver extends RTObserver {
   collection = undefined
   client = undefined
   target = {}
+  protocol = 'mongodb'
 
   constructor(config) {
     super(config)
 
+    if (config.SERVER_PROTOCOL) {
+      this.protocol = config.SERVER_PROTOCOL
+    }
+
     mongoose
       .connect(
-        `mongodb+srv://${this.config.SERVER_ID}:${this.config.SERVER_PW}@${this.config.SERVER_URL}`,
+        `${this.protocol}://${this.config.SERVER_ID}:${this.config.SERVER_PW}@${this.config.SERVER_URL}`,
         { dbName: this.config.MONGO_DATABASE },
       )
       .then(async () => {
